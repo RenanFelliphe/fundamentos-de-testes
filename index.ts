@@ -8,7 +8,7 @@ Regra de Negócio:
 {
     interface ICart {
         products: IProduct[]
-        cupom: number,
+        coupon: number,
     }
 
     interface IProduct {
@@ -22,13 +22,13 @@ Regra de Negócio:
             {id: 1, nome: "Batata Doce", unityValue: 50},
             {id: 2, nome: "Cenoura", unityValue: 50}
         ],
-        cupom: 10
+        coupon: 10
     }
 
     calcShoppingCart(cart)
 
     function calcShoppingCart(cart: ICart){
-        const {products, cupom} = cart
+        const {products, coupon} = cart
         let totalCart, freight, totalProducts = 0        
 
         products.forEach((product) => {
@@ -45,7 +45,7 @@ Regra de Negócio:
             console.log("| - Frete: ", freight)
         
             console.log("| - Valor Total: sem Cupom: ", totalProducts)
-        cupom != 0 ? (totalProducts -= totalProducts*cupom/100) : totalProducts
+        coupon != 0 ? (totalProducts -= totalProducts*coupon/100) : totalProducts
             console.log("| - Valor Total: com Cupom: ", totalProducts)
 
         totalCart = totalProducts + freight
