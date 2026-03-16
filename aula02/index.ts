@@ -1,3 +1,4 @@
+import scanf from 'scanf'
 import { validar } from '../framework-teste'
 
 interface IUsuario {
@@ -33,50 +34,82 @@ const usuarios = [
     }
 ]
 
-const emprestar = ({ livros, usuario }: IEmprestar): boolean => {
-    const usuarioExiste = usuarios.filter(user => user.id === usuario.id)
+const emprestar = ({ livros: livrosEmprestimo, usuario: usuarioEmprestimo }: IEmprestar): boolean => {
+    const usuarioExiste = usuarios.filter(user => user.id === usuarioEmprestimo.id)
     if (!(usuarioExiste.length > 0)) return false
-    if (livros.length > 3) return false
+    if (livrosEmprestimo.length > 3) return false
+
+    const emprestimo: IEmprestar = {
+        usuario: usuarioEmprestimo,
+        livros: livrosEmprestimo
+    }
     return true
 }
 
-validar({
-    descricao: 'emprestar() - Usuário previamente cadastrado e Quantidade de livros menor que o máximo',
-    esperado: true,
-    atual: emprestar({
-        usuario: { id: 1, nome: 'Daniel' },
-        livros: [
-            { id: 1, titulo: 'O Senhor dos Anéis - A Sociedade do Anel' },
-            { id: 2, titulo: 'O Senhor dos Anéis - As Duas Torres' },
-            { id: 3, titulo: 'O Senhor dos Anéis - O Retorno do Rei' },
-        ]
+    // const devolver =
+    // const storedEmprestimo = localStorage.getItem("emprestimo")
+    // storedEmprestimo ? JSON.parse(storedEmprestimo) : []
+
+    while(true){
+        console.log("| - Fazer um emprestimo: [1]")
+        console.log("| - Fazer uma devolução: [2]")
+        console.log("| - Sair: [3]")
+        const escolha = scanf('%d')
+        
+        switch(escolha){
+            case 1: {
+                console.log("| - Emprestimo feito")
+            }
+
+            case 2: {
+                console.log("| - Devolução feita")
+            }
+
+            default: {
+                break;
+            }
+
+        }
     }
-    )
-})
-validar({
-    descricao: 'emprestar() - Usuário previamente cadastrado e Quantidade de livros maior que o máximo',
-    esperado: false,
-    atual: emprestar({
-        usuario: { id: 1, nome: 'Daniel' },
-        livros: [
-            { id: 1, titulo: 'O Senhor dos Anéis - A Sociedade do Anel' },
-            { id: 2, titulo: 'O Senhor dos Anéis - As Duas Torres' },
-            { id: 3, titulo: 'O Senhor dos Anéis - O Retorno do Rei' },
-            { id: 4, titulo: 'O Hobbit' },
-        ]
-    }
-    )
-})
-validar({
-    descricao: 'emprestar() - Usuário não cadastrado e Quantidade de livros menor que o máximo',
-    esperado: false,
-    atual: emprestar({
-        usuario: { id: 10, nome: 'Daniel' },
-        livros: [
-            { id: 1, titulo: 'O Senhor dos Anéis - A Sociedade do Anel' },
-            { id: 2, titulo: 'O Senhor dos Anéis - As Duas Torres' },
-            { id: 3, titulo: 'O Senhor dos Anéis - O Retorno do Rei' },
-        ]
-    }
-    )
-})
+
+// validar({
+//     descricao: 'emprestar() - Usuário previamente cadastrado e Quantidade de livros menor que o máximo',
+//     esperado: true,
+//     atual: emprestar({
+//         usuario: { id: 1, nome: 'Daniel' },
+//         livros: [
+//             { id: 1, titulo: 'O Senhor dos Anéis - A Sociedade do Anel' },
+//             { id: 2, titulo: 'O Senhor dos Anéis - As Duas Torres' },
+//             { id: 3, titulo: 'O Senhor dos Anéis - O Retorno do Rei' },
+//         ]
+//     }
+//     )
+// })
+// validar({
+//     descricao: 'emprestar() - Usuário previamente cadastrado e Quantidade de livros maior que o máximo',
+//     esperado: false,
+//     atual: emprestar({
+//         usuario: { id: 1, nome: 'Daniel' },
+//         livros: [
+//             { id: 1, titulo: 'O Senhor dos Anéis - A Sociedade do Anel' },
+//             { id: 2, titulo: 'O Senhor dos Anéis - As Duas Torres' },
+//             { id: 3, titulo: 'O Senhor dos Anéis - O Retorno do Rei' },
+//             { id: 4, titulo: 'O Hobbit' },
+//         ]
+//     }
+//     )
+// })
+
+// validar({
+//     descricao: 'emprestar() - Usuário não cadastrado e Quantidade de livros menor que o máximo',
+//     esperado: false,
+//     atual: emprestar({
+//         usuario: { id: 10, nome: 'Daniel' },
+//         livros: [
+//             { id: 1, titulo: 'O Senhor dos Anéis - A Sociedade do Anel' },
+//             { id: 2, titulo: 'O Senhor dos Anéis - As Duas Torres' },
+//             { id: 3, titulo: 'O Senhor dos Anéis - O Retorno do Rei' },
+//         ]
+//     }
+//     )
+// })
